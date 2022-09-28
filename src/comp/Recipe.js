@@ -1,13 +1,14 @@
 import React from 'react';
 
-export const Recipe = (prop) => {
+import './recipeStyles.css'
 
+export const Recipe = (prop) => {
 
  return(
 
-    <div>
+    <div className='recipe'>
        
-       <h1>{prop.title}</h1>
+       <h2>{prop.title}</h2>
        <p>Calories: {prop.cal}</p>
        <img src={prop.img} alt=''/>
          

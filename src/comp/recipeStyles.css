@@ -1,0 +1,32 @@
+.recipe{
+
+ background-color: white;
+ border-radius: 5px;
+ padding: 2em;
+ flex-flow: row wrap;
+ justify-content: space-around;
+
+}
+
+img{
+
+ width: 100%;
+ margin: auto;
+ border-radius: 5px;
+
+}
+
+
+h2{
+
+    padding: 0;
+    margin: 0 auto;
+    padding-bottom: 0.5em;
+}
+
+p{
+
+    padding: 0;
+    margin: 0 auto;
+    padding-bottom: 1.5em;
+}
