@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Recipe } from './comp/Recipe';
+import './AppStyles.css'
 
 function App() {
 
@@ -8,32 +9,46 @@ function App() {
 
   const [recipes, setRecipes] = useState([]);
 
-  useEffect(()=>{
+  const [search, setSearch] = useState('');
+  const [query, setQuery] = useState('chicken');
+
+
+  useEffect( ()=>{
+
+    const getRecipes = async () => {
+
+      const response = await fetch(`https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`);
+      const data = await response.json();
+  
+      setRecipes(data.hits);
+  
+    }
 
     getRecipes();
 
-  }, []);
+  }, [query]);
 
 
-  const getRecipes = async () => {
+  const getSearch = (e) => {
 
-    const response = await fetch(`https://api.edamam.com/search?q=chicken&app_id=${APP_ID}&app_key=${APP_KEY}`);
-    const data = await response.json();
-
-    setRecipes(data.hits);
-
+   e.preventDefault();
+   setQuery(search);
+   setSearch('');
+ 
   }
 
   return (
 
     <div className='App'>
 
-      <form className='search_form'>
+      <form className='search_form' onSubmit={getSearch}>
  
-        <input className='search_bar' type='text'/>
+        <input className='search_bar' type='text' value={search} onChange={i=>setSearch(i.target.value)}/>
         <button className='search_button' type='submit'>search</button>
 
       </form>
+
+      <div className='recipe-wrap'>
 
       {
 
@@ -44,12 +59,15 @@ function App() {
             title={recipe.recipe.label}
             cal={recipe.recipe.calories}
             img={recipe.recipe.image}
+            key={recipe.recipe.label}
             
             />
 
          ))
 
       }
+
+</div>
 
     </div>
 
